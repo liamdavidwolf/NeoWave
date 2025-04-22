@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Artistas Destacados - NeoWave</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="css/artistas.css">
+</head>
+<body>
+  <div class="container-fluid vh-100 overflow-hidden">
+    <div class="row h-100">
+
+      <!-- Sidebar Izquierdo -->
+      <div class="col-md-2 bg-dark text-white d-flex flex-column p-3">
+        <img src="assets/logos/logo.png" alt="logo" class="img-fluid mx-auto d-block mb-4" width="100" height="50">
+        <a href="/inicio.html" class="text-white mb-2"><i class="bi bi-house-fill me-2"></i>Inicio</a>
+        <a href="/artistas.html" class="text-white mb-2"><i class="bi bi-cassette-fill me-2"></i>Artistas</a>
+        <a href="#" class="text-white mb-2"><i class="bi bi-music-note-beamed me-2"></i>Álbums</a>
+        <a href="#" class="text-white mb-2"><i class="bi bi-calendar-fill me-2"></i>Nuevos Lanzamientos</a>
+        <hr class="text-secondary">
+        <a href="#" class="text-white mb-2"><i class="bi bi-file-music-fill me-2"></i>Música Reciente</a>
+        <a href="#" class="text-white mb-2"><i class="bi bi-heart-fill me-2"></i>Favoritos</a>
+        <a href="#" class="text-white mb-2"><i class="bi bi-music-note-list me-2"></i>Mis Playlist</a>
+        <hr class="text-secondary">
+        <a href="#" class="text-white mb-2"><i class="bi bi-person-circle me-2"></i>Mi Cuenta</a>
+        <a href="/planes.html" class="text-white mb-2"><i class="bi bi-stars me-2"></i>Planes Premium</a>
+        <a href="#" class="text-white"><i class="bi bi-gear-fill me-2"></i>Configuración</a>
+      </div>
+
+      <!-- Contenido Principal -->
+      <div class="col-md-8 py-5 px-4 overflow-auto">
+        <h1 class="text-center mb-4">Artistas Destacados</h1>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+
+          <!-- Dua Lipa -->
+          <div class="col">
+            <div class="artist-card text-center">
+              <img src="/assets/dualipa.png" alt="Dua Lipa" class="artist-img mb-3">
+              <h4>Dua Lipa</h4>
+              <p class="text-muted">Cantante y compositora británica ganadora del Grammy, conocida por su estilo pop y éxitos como "Levitating" y "Don't Start Now".</p>
+            </div>
+          </div>
+
+          <!-- The Weeknd -->
+          <div class="col">
+            <div class="artist-card text-center">
+              <img src="/assets/theweeknd.png" alt="The Weeknd" class="artist-img mb-3">
+              <h4>The Weeknd</h4>
+              <p class="text-muted">Artista canadiense de R&B y pop con una estética oscura y futurista. Famoso por hits como "Blinding Lights" y "Save Your Tears".</p>
+            </div>
+          </div>
+
+          <!-- Katy Perry -->
+          <div class="col">
+            <div class="artist-card text-center">
+              <img src="/assets/katyperry.jpg" alt="Katy Perry" class="artist-img mb-3">
+              <h4>Katy Perry</h4>
+              <p class="text-muted">Ícono pop con un estilo vibrante y teatral. Reconocida por éxitos globales como "Roar", "Firework" y "Dark Horse".</p>
+            </div>
+          </div>
+
+          <!-- Twenty One Pilots -->
+          <div class="col">
+            <div class="artist-card text-center">
+              <img src="/assets/top.png" alt="Twenty One Pilots" class="artist-img mb-3">
+              <h4>Twenty One Pilots</h4>
+              <p class="text-muted">Dúo estadounidense que mezcla rock alternativo, rap y pop. Conocidos por temas como "Stressed Out" y "Heathens".</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Sidebar Derecho -->
+      <div class="col-md-2 bg-dark text-white p-3 d-flex flex-column">
+        <div class="text-center mb-4">
+          <h6 class="fw-bold text-uppercase text-secondary">Reproductor</h6>
+          <img src="https://via.placeholder.com/150" class="rounded-3 shadow mb-2" id="now-cover" alt="Portada" style="width: 100%; object-fit: cover;">
+          <p class="mb-0 fw-semibold" id="now-title">Cargando...</p>
+          <small class="text-muted" id="now-artist">Artista</small>
+          <audio id="now-audio" src="" controls class="w-100 mt-2"></audio>
+          <div class="mt-3 d-flex justify-content-around">
+            <button class="btn btn-outline-light btn-sm rounded-circle" id="prevBtn"><i class="bi bi-skip-start-fill"></i></button>
+            <button class="btn btn-light btn-sm rounded-circle" id="playPauseBtn"><i class="bi bi-play-fill"></i></button>
+            <button class="btn btn-outline-light btn-sm rounded-circle" id="nextBtn"><i class="bi bi-skip-end-fill"></i></button>
+          </div>
+        </div>
+
+        <div class="overflow-auto flex-grow-1 px-2">
+          <div class="d-flex align-items-center mb-2">
+            <i class="bi bi-music-note-list me-2 text-white"></i>
+            <small class="text-uppercase text-light fw-semibold">A continuación</small>
+            <hr class="flex-grow-1 ms-3 border-light opacity-25">
+          </div>
+          <ul id="songList" class="list-unstyled mt-2"></ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="/js/inicio.js"></script>
+</body>
+</html>

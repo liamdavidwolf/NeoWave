@@ -1,0 +1,13 @@
+
+    .cover-img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+    }
+    .playlist-card {
+      transition: transform 0.2s ease;
+    }
+    .playlist-card:hover {
+      transform: scale(1.02);
+    }

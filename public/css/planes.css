@@ -1,0 +1,143 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Body */
+body {
+  background-image: url('IMG/planbg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+/* Logo */
+.logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+.logo-img {
+  display: block;
+  max-height: 120px;
+  width: auto;
+}
+
+/* Navigation Links */
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  margin-left: 20px;
+}
+
+/* Navbar (Bootstrap Overrides) */
+.navbar {
+  padding-left: 1.5rem; /* similar a px-4 en Bootstrap */
+  padding-right: 1.5rem;
+}
+.navbar-nav .nav-link {
+  color: #fff;
+  font-weight: 600;
+  transition: color .2s;
+}
+.navbar-nav .nav-link:hover {
+  color: #ccc;
+}
+
+/* Hero Section */
+.hero-section {
+  /* Empuja hacia abajo el texto central (hero) */
+  padding-top: 20vh;
+}
+
+/* Headings */
+h1 {
+  font-size: 2.5em;
+  margin: 40px 0 30px;
+}
+.benefit h2 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+.promo h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+/* Benefits Section */
+.benefits {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+.benefit {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.benefit img {
+  width: 50px;
+  height: 50px;
+}
+
+/* Advertisement Icon */
+.ads-icon {
+  font-size: 2em;
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+}
+.ads-icon span {
+  font-size: 0.5em;
+}
+
+/* Promo Pricing */
+.promo {
+  text-align: center;
+}
+.tachado {
+  text-decoration: line-through;
+  color: #ccc;
+  font-size: 1em;
+}
+.precio {
+  font-size: 3em;
+  font-weight: 900;
+  color: #fff;
+}
+.precio span {
+  font-size: 0.4em;
+  font-weight: 400;
+  margin-left: 5px;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Aplica la animación al body */
+body {
+  animation: fadeInUp 1s ease-out;
+}

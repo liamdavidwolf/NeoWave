@@ -1,0 +1,121 @@
+
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .sidebar {
+      background-color: #1a1a1a;
+      height: 100vh;
+      padding: 1rem;
+    }
+    .sidebar a {
+      color: #ccc;
+      text-decoration: none;
+      display: block;
+      margin: 1rem 0;
+    }
+    .sidebar a:hover {
+      color: #fff;
+    }
+    .album-cover {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.2s;
+    }
+    .album-cover:hover {
+      transform: scale(1.03);
+    }
+    .content {
+      padding: 2rem;
+      overflow-y: auto;
+      height: 100vh;
+    }
+    .section-title {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .right-panel {
+      background-color: #1a1a1a;
+      height: 100vh;
+      padding: 1rem;
+    }
+    .now-playing {
+      position: sticky;
+      top: 0;
+    }
+    .now-playing-cover {
+    width: 100%;
+    max-width: 150px; 
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    }
+
+    .right-panel {
+        background-color: #1e1e2f;
+        color: white;
+        border-left: 1px solid #2c2c3e;
+      }
+      
+      .right-panel .btn {
+        transition: all 0.3s ease;
+      }
+      
+      .right-panel .btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 10px rgba(255,255,255,0.2);
+      }
+      
+      .right-panel .now-playing-cover {
+        transition: transform 0.4s ease;
+      }
+      
+      .right-panel .now-playing-cover:hover {
+        transform: scale(1.03);
+      }
+      
+      .search-bar {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        height: 50px;
+        width: 100%;
+      }
+      
+      .search-bar input::placeholder {
+        color: #ccc;
+      }
+      
+      .search-bar input:focus {
+        outline: none;
+        box-shadow: none;
+      }
+      
+.right-panel .overflow-auto {
+    scrollbar-width: thin;
+    scrollbar-color: #888 transparent;
+  }
+
+  .right-panel .overflow-auto::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .right-panel .overflow-auto::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .right-panel .overflow-auto::-webkit-scrollbar-thumb {
+    background-color: #666;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    transition: background-color 0.3s ease;
+  }
+  
+  .right-panel .overflow-auto::-webkit-scrollbar-thumb:hover {
+    background-color: #aaa;
+  }
+.artist-name {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    font-style: italic;
+  }

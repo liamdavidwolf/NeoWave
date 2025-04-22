@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro - NeoWave</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="css/registro.css">
+</head>
+<body class="registration-page">
+
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg navbar-dark px-4">
+    <a class="navbar-brand logo" href="#">
+      <img src="IMG/neowavelogo.png" 
+           alt="NeoWave Logo" 
+           class="logo-img">
+    </a>    
+    <div class="collapse navbar-collapse justify-content-end">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Planes</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      
+      <!-- COLUMNA IZQUIERDA: TEXTO + FORMULARIO -->
+      <div class="col-md-6 d-flex flex-column justify-content-center text-white position-relative content-left">
+        <h1 class="display-1 fw-bold welcome-title text-center">BIENVENIDO.</h1>
+        <p class="lead mb-5 tagline text-center">
+          “Un servicio donde la música cobra vida”
+        </p>
+
+        <div class="card form-card p-4">
+          <form>
+            <div class="mb-3">
+              <label class="form-label text-white-50">Correo electrónico o usuario</label>
+              <input type="email" class="form-control dotted-input" placeholder="Ingresa tu correo">
+            </div>
+            <div class="mb-3 position-relative">
+              <label class="form-label text-white-50">Contraseña</label>
+              <input type="password" class="form-control dotted-input" placeholder="••••••••">
+              <i class="fa-solid fa-eye-slash toggle-password"></i>
+            </div>
+            <button type="submit" class="btn btn-light btn-sm w-100 mb-3">Crear Cuenta</button>
+          </form>
+
+          <hr class="dotted-separator">
+
+          <button class="btn btn-google btn-sm mb-2 w-100">
+            <i class="fab fa-google me-2"></i>Continuar con Google
+          </button>
+          <button class="btn btn-facebook btn-sm mb-3 w-100">
+            <i class="fab fa-facebook-f me-2"></i>Continuar con Facebook
+          </button>
+
+          <p class="text-center mb-0">
+            ¿Tienes cuenta? <a href="#" class="text-decoration-underline text-white">¡Inicia Sesión!</a>
+          </p>
+        </div>
+
+        <div class="arrow-down text-center">
+          <i class="fa-solid fa-chevron-down fa-2x"></i>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA: IMAGEN -->
+      <div class="col-md-6 p-0 d-none d-md-block">
+        <img src="IMG/michael_jackson.png" alt="Michael Jackson" class="img-fluid mj-img">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS (opcional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

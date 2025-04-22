@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NeoWave - Reproductor</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .cover-img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+    }
+
+    .song-card {
+      transition: transform 0.2s ease;
+    }
+
+    .song-card:hover {
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-4">
+    <h1 class="text-center mb-4">🎵 NeoWave - Subida y Reproductor</h1>
+
+    <!-- Subida -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <form id="uploadForm">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="title" placeholder="Título" required />
+            </div>
+            <div class="col-md-4">
+              <input type="text" class="form-control" name="artist" placeholder="Artista" required />
+            </div>
+            <div class="col-md-4">
+              <input type="file" class="form-control" name="cover" accept="image/*" required />
+            </div>
+            <div class="col-md-8">
+              <input type="file" class="form-control" name="audio" accept="audio/*" required />
+            </div>
+            <div class="col-md-4">
+              <button type="submit" class="btn btn-primary w-100">Subir canción</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Lista de canciones -->
+    <div id="songList" class="row gy-4"></div>
+
+    <!-- Reproductor fijo -->
+    <div class="fixed-bottom bg-white shadow p-3" id="playerContainer" style="display: none;">
+      <div class="d-flex align-items-center gap-3">
+        <img id="playerCover" src="" class="cover-img" alt="Cover" />
+        <div class="flex-grow-1">
+          <h5 id="playerTitle" class="mb-0">Título</h5>
+          <small id="playerArtist">Artista</small>
+        </div>
+        <audio id="audioPlayer" controls class="w-50"></audio>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal edición -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="editForm" class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar canción</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="editSongId" />
+          <div class="mb-3">
+            <label for="editTitle">Título</label>
+            <input type="text" class="form-control" id="editTitle" required />
+          </div>
+          <div class="mb-3">
+            <label for="editArtist">Artista</label>
+            <input type="text" class="form-control" id="editArtist" required />
+          </div>
+          <div class="mb-3">
+            <label for="editCover">Cambiar portada (opcional)</label>
+            <input type="file" class="form-control" id="editCover" accept="image/*" />
+          </div>
+          <div class="mb-3">
+            <label for="editAudio">Cambiar audio (opcional)</label>
+            <input type="file" class="form-control" id="editAudio" accept="audio/*" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('uploadForm');
+    const songList = document.getElementById('songList');
+    const playerContainer = document.getElementById('playerContainer');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playerCover = document.getElementById('playerCover');
+    const playerTitle = document.getElementById('playerTitle');
+    const playerArtist = document.getElementById('playerArtist');
+    let editModal;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSongs();
+      editModal = new bootstrap.Modal(document.getElementById('editModal'));
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const res = await fetch('/api/songs/upload', {
+        method: 'POST',
+        body: formData
+      });
+      if (res.ok) {
+        alert('🎉 Canción subida');
+        form.reset();
+        loadSongs();
+      } else {
+        alert('❌ Error al subir');
+      }
+    });
+
+    async function loadSongs() {
+      songList.innerHTML = '';
+      const res = await fetch('/api/songs');
+      const songs = await res.json();
+
+      songs.forEach(song => {
+        const col = document.createElement('div');
+        col.className = 'col-12';
+
+        col.innerHTML = `
+          <div class="card song-card shadow-sm">
+            <div class="row g-0 align-items-center p-3">
+              <div class="col-auto">
+                <img src="/api/songs/cover/${song.cover}" class="cover-img" alt="${song.title}" onclick="playSong('${song.filename}', '${song.cover}', '${song.title}', '${song.artist}')">
+              </div>
+              <div class="col-md-4 ps-3">
+                <h5 class="mb-1">${song.title}</h5>
+                <p class="text-muted mb-1">${song.artist}</p>
+              </div>
+              <div class="col-md-4">
+                <audio controls class="w-100" src="/api/songs/play/${song.filename}"></audio>
+              </div>
+              <div class="col-md-3 d-flex flex-column gap-2">
+                <button class="btn btn-outline-secondary btn-sm" onclick="openEditModal('${song._id}', '${song.title}', '${song.artist}')">✏ Editar</button>
+                <button class="btn btn-outline-danger btn-sm" onclick="deleteSong('${song._id}')">🗑 Eliminar</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+        songList.appendChild(col);
+      });
+    }
+
+    function playSong(filename, cover, title, artist) {
+      audioPlayer.src = `/api/songs/play/${filename}`;
+      audioPlayer.play();
+      playerCover.src = `/api/songs/cover/${cover}`;
+      playerTitle.textContent = title;
+      playerArtist.textContent = artist;
+      playerContainer.style.display = 'flex';
+    }
+
+    async function deleteSong(id) {
+      if (confirm('¿Estás seguro de que deseas eliminar esta canción?')) {
+        const res = await fetch(`/api/songs/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          alert('🗑 Canción eliminada');
+          loadSongs();
+        } else {
+          alert('❌ No se pudo eliminar');
+        }
+      }
+    }
+
+    function openEditModal(id, title, artist) {
+      document.getElementById('editSongId').value = id;
+      document.getElementById('editTitle').value = title;
+      document.getElementById('editArtist').value = artist;
+      document.getElementById('editCover').value = '';
+      document.getElementById('editAudio').value = '';
+      editModal.show();
+    }
+
+    document.getElementById('editForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const id = document.getElementById('editSongId').value;
+      const formData = new FormData();
+      formData.append('title', document.getElementById('editTitle').value);
+      formData.append('artist', document.getElementById('editArtist').value);
+      const cover = document.getElementById('editCover').files[0];
+      const audio = document.getElementById('editAudio').files[0];
+      if (cover) formData.append('cover', cover);
+      if (audio) formData.append('audio', audio);
+
+      const res = await fetch(`/api/songs/${id}`, {
+        method: 'PUT',
+        body: formData
+      });
+
+      if (res.ok) {
+        alert('✅ Canción actualizada');
+        editModal.hide();
+        loadSongs();
+      } else {
+        alert('❌ No se pudo actualizar');
+      }
+    });
+  </script>
+</body>
+</html>
