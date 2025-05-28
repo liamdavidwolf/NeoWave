@@ -305,7 +305,7 @@ This document provides details for the Playlist API routes, assuming the applica
 *   **Description:** Creates a new playlist. Requires user ID, playlist name, and a list of song IDs. An optional cover image can be uploaded.
 *   **Parameters:** None
 *   **Request Body:** `multipart/form-data`
-    *   `userId`: String (MongoDB ObjectId, required according to the Playlist schema `models/Playlist.js`)
+    *   `userId`: String (MongoDB ObjectId, **required**)
     *   `name`: String (required)
     *   `songs`: Array of Strings (MongoDB ObjectIds corresponding to songs, required). If sending from a form and only one song, it might be sent as a single string which the backend handles.
     *   `cover`: File (image file, e.g., .jpg, .png) (optional)
@@ -326,7 +326,7 @@ This document provides details for the Playlist API routes, assuming the applica
 *   **Example Response (on error - missing data):**
     ```json
     {
-      "error": "Faltan datos en la solicitud"
+      "error": "Faltan datos en la solicitud: nombre es requerido. canciones son requeridas. userId es requerido."
     }
     ```
 

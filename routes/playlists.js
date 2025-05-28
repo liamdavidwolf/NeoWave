@@ -15,16 +15,22 @@ const upload = multer({ storage });
 // POST /api/playlists con portada
 router.post('/', upload.single('cover'), async (req, res) => {
   try {
-    const { name, songs } = req.body;
+    const { name, songs, userId } = req.body; // 1. Destructure userId
 
-    if (!name || !songs) {
-      return res.status(400).json({ error: 'Faltan datos en la solicitud' });
+    // 2. Add userId to validation check
+    if (!name || !songs || !userId) {
+      let errorMessage = 'Faltan datos en la solicitud: ';
+      if (!name) errorMessage += 'nombre es requerido. ';
+      if (!songs) errorMessage += 'canciones son requeridas. ';
+      if (!userId) errorMessage += 'userId es requerido.';
+      return res.status(400).json({ error: errorMessage.trim() });
     }
 
     const cover = req.file ? `/covers/${req.file.filename}` : null;
     const songsArray = Array.isArray(songs) ? songs : [songs];
 
-    const newPlaylist = new Playlist({ name, songs: songsArray, cover });
+    // 3. Include userId in new Playlist object
+    const newPlaylist = new Playlist({ name, songs: songsArray, cover, userId });
     await newPlaylist.save();
     res.status(201).json({ message: 'Playlist guardada correctamente', playlist: newPlaylist });
   } catch (err) {
