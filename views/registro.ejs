@@ -37,18 +37,12 @@
         </p>
 
         <div class="card form-card p-4">
-          <form>
-            <div class="mb-3">
-              <label class="form-label text-white-50">Correo electrónico o usuario</label>
-              <input type="email" class="form-control dotted-input" placeholder="Ingresa tu correo">
-            </div>
-            <div class="mb-3 position-relative">
-              <label class="form-label text-white-50">Contraseña</label>
-              <input type="password" class="form-control dotted-input" placeholder="••••••••">
-              <i class="fa-solid fa-eye-slash toggle-password"></i>
-            </div>
-            <button type="submit" class="btn btn-light btn-sm w-100 mb-3">Crear Cuenta</button>
+          <form action="/registro" method="POST">
+            <input type="email" name="email" required placeholder="Correo electrónico">
+            <input type="password" name="password" required placeholder="Contraseña">
+            <button type="submit">Registrarse</button>
           </form>
+          
 
           <hr class="dotted-separator">
 

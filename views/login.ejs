@@ -19,8 +19,8 @@
     </a>    
     <div class="collapse navbar-collapse justify-content-end">
       <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="#">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Planes</a></li>
+        <li class="nav-item"><a class="nav-link" href="inicio">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="planes">Planes</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
       </ul>
     </div>
@@ -38,22 +38,28 @@
         </p>
 
         <div class="card form-card p-4">
-            <form>
-              <div class="mb-3">
-                <label class="form-label text-white-50">Correo electrónico o usuario</label>
-                <input type="email" class="form-control dotted-input" placeholder="Ingresa tu correo">
-              </div>
-              <div class="mb-3 position-relative">
-                <label class="form-label text-white-50">Contraseña</label>
-                <input type="password" class="form-control dotted-input" placeholder="••••••••">
-                <i class="fa-solid fa-eye-slash toggle-password"></i>
-              </div>
-              <button type="submit" class="btn btn-light btn-sm w-100 mb-3">Iniciar Sesión</button>
-            </form>
+          <form action="/login" method="POST">
+            <div class="mb-3">
+              <label class="form-label text-white-50">Correo electrónico o usuario</label>
+              <input type="email" class="form-control dotted-input" name="email" placeholder="Ingresa tu correo" required>
+            </div>
+            <div class="mb-3 position-relative">
+              <label class="form-label text-white-50">Contraseña</label>
+              <input type="password" class="form-control dotted-input" name="password" placeholder="••••••••" required>
+              <i class="fa-solid fa-eye-slash toggle-password"></i>
+            </div>
+            <button type="submit" class="btn btn-light btn-sm w-100 mb-3">Iniciar Sesión</button>
           
-            <p class="text-center mb-0">
-              ¿No tienes cuenta? <a href="#" class="text-decoration-underline text-white">¡Regístrate!</a>
-            </p>
+            <% if (typeof error !== 'undefined') { %>
+              <div class="alert alert-danger mt-2"><%= error %></div>
+            <% } %>
+          </form>
+          
+          
+          
+          <p class="text-center mb-0">
+            ¿No tienes cuenta? <a href="/registro" class="text-decoration-underline text-white">¡Regístrate!</a>
+          </p>          
           </div>
       </div>
 
